@@ -2,7 +2,7 @@
 - Image confluence: atlassian/confluence:9.1.0
 - Java version: 21
 
-- Cài đặt docker docker& docker compose, mysql
+- Cài đặt docker & docker compose, mysql:8.0.44
 - Cài db cho 2 service jira và confluence
 - Tải mysql connector & bản crack jira-confluence
     + Mysql connector: mysql-connector-java-8.0.22.jar
