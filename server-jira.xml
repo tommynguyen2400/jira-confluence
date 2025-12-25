@@ -22,7 +22,7 @@
                acceptCount="10"
                secure="true"
                scheme="https"
-               proxyName="domain"
+               proxyName="tên domain"
                proxyPort="443"
 
                relaxedPathChars="[]|"
