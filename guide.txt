@@ -5,7 +5,7 @@
 - Cài đặt docker docker& docker compose, mysql
 - Cài db cho 2 service jira và confluence
 - Tải mysql connector & bản crack jira-confluence
-    + Mysql connector: 
+    + Mysql connector: mysql-connector-java-8.0.22.jar
     + Jira-confluence crack: https://github.com/guywiththecrack/jira-crack
 - Sau đó chỉnh lại config trong file xml theo config của mình
 - Sau khi chỉnh xong thì chạy docker compose up -d
