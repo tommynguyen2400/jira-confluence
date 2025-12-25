@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  confluence:
+    image: atlassian/confluence:9.1.0
+    container_name: confluence
+    ports:
+      - "8090:8090"
+    volumes:
+      # Persistent Confluence Home (data + attachments + configs)
+      - confluence_data:/var/atlassian/application-data/confluence
+
+      # Mount server.xml để tùy chỉnh Tomcat connector / thread / timeout
+      - ./server.xml:/opt/atlassian/confluence/conf/server.xml:ro
+
+      # Mount agent.jar (nếu cần)
+      - ./atlassian-agent.jar:/var/agents/atlassian-agent.jar:ro
+
+      # mysql  
+      - ./mysql-connector-java-8.0.22.jar:/opt/atlassian/confluence/confluence/WEB-INF/lib/mysql-connector-java-8.0.22.jar:ro
+    environment:
+      # Java agent + heap memory
+      JVM_SUPPORT_RECOMMENDED_ARGS: "-javaagent:/var/agents/atlassian-agent.jar"
+      JVM_MINIMUM_MEMORY: "2048m"
+      JVM_MAXIMUM_MEMORY: "4096m"
+      TZ: "Asia/Ho_Chi_Minh"
+
+    restart: unless-stopped
+  jira:
+    image: atlassian/jira-software:9.17.4
+    container_name: jira
+    ports:
+      - "8080:8080"
+    volumes:
+      # Persistent Jira Home (data + attachments + configs)
+      - jira_data:/var/atlassian/application-data/jira
+
+      # Mount server.xml để tùy chỉnh Tomcat connector / thread / timeout
+      - ./server-jira.xml:/opt/atlassian/jira/conf/server.xml:ro
+
+      # Mount agent.jar (nếu cần)
+      - ./atlassian-agent.jar:/var/agents/atlassian-agent.jar:ro
+
+      # mysql  
+      - ./mysql-connector-java-8.0.22.jar:/opt/atlassian/jira/lib/mysql-connector-java-8.0.22.jar:ro
+    environment:
+      # Java agent + heap memory
+      JVM_SUPPORT_RECOMMENDED_ARGS: "-javaagent:/var/agents/atlassian-agent.jar"
+      JVM_MINIMUM_MEMORY: "2048m"
+      JVM_MAXIMUM_MEMORY: "4096m"
+
+    restart: unless-stopped
+
+
+
+volumes:
+  confluence_data:
+  jira_data:
